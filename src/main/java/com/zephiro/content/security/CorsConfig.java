@@ -32,8 +32,8 @@ public class CorsConfig {
                         HttpMethod.POST.name(),
                         HttpMethod.PUT.name(),
                         HttpMethod.DELETE.name()));
-        
-                        source.registerCorsConfiguration("/**", config);
+
+        source.registerCorsConfiguration("/**", config);
         FilterRegistrationBean<CorsFilter> bean = new FilterRegistrationBean<>(new CorsFilter(source));
         
         bean.setOrder(-102);

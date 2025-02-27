@@ -1,27 +1,36 @@
 package com.zephiro.content.security;
 // ToDo: para el servicio plantilla
 
-import io.jsonwebtoken.Jwts;
-import org.springframework.beans.factory.annotation.Value;
+import java.security.Key;
+import java.util.Date;
+
 import org.springframework.stereotype.Component;
+
+import io.jsonwebtoken.Jwts;
+import io.jsonwebtoken.SignatureAlgorithm;
+import io.jsonwebtoken.security.Keys;
 
 @Component
 public class JWTGenerator {
 
-    @Value("${jwt.secret}")
-    private String secretKey;
+    private static final Key key = Keys.secretKeyFor(SignatureAlgorithm.HS512);
+    public static final Long EXPIRATION_TIME = 7000000L;
 
-    @Value("${jwt.expiration}")
-    private Long expirationTime;
+    public String generateToken(String username) {
+        Date currentDate = new Date();
+        Date expireDate = new Date(currentDate.getTime() + EXPIRATION_TIME);
 
-    public String getUserFromJwt(String token) {
-        return Jwts.parserBuilder().setSigningKey(secretKey.getBytes()).build()
-                .parseClaimsJws(token).getBody().getSubject();
+        return Jwts.builder()
+                .setSubject(username)
+                .setIssuedAt(currentDate)
+                .setExpiration(expireDate)
+                .signWith(key, SignatureAlgorithm.HS512)
+                .compact();
     }
 
     public boolean validateToken(String token) {
         try {
-            Jwts.parserBuilder().setSigningKey(secretKey.getBytes()).build().parseClaimsJws(token);
+            Jwts.parserBuilder().setSigningKey(key).build().parseClaimsJws(token);
             return true;
         } catch (Exception e) {
             return false;

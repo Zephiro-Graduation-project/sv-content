@@ -2,6 +2,7 @@ package com.zephiro.content.security;
 // ToDo: para el servicio plantilla
 
 import java.io.IOException;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -27,9 +28,8 @@ public class JWTAuthenticationFilter extends OncePerRequestFilter {
         String token = getJWT(request);
 
         if (token != null && jwtGenerator.validateToken(token)) {
-            String username = jwtGenerator.getUserFromJwt(token);
-            UsernamePasswordAuthenticationToken authenticationToken =
-                    new UsernamePasswordAuthenticationToken(username, null, null);
+            UsernamePasswordAuthenticationToken authenticationToken = 
+                new UsernamePasswordAuthenticationToken(null, null, null);
             authenticationToken.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
             SecurityContextHolder.getContext().setAuthentication(authenticationToken);
         }
@@ -39,6 +39,9 @@ public class JWTAuthenticationFilter extends OncePerRequestFilter {
 
     private String getJWT(HttpServletRequest request) {
         String bearerToken = request.getHeader("Authorization");
-        return (bearerToken != null && bearerToken.startsWith("Bearer ")) ? bearerToken.substring(7) : null;
+        if (bearerToken != null && bearerToken.startsWith("Bearer ")) {
+            return bearerToken.substring(7);
+        }
+        return null;
     }
 }
