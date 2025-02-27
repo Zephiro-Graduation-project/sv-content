@@ -1,0 +1,6 @@
+### ToDo: para el servicio plantilla ###
+target/
+*.iml
+*.log
+.idea/
+*.git
