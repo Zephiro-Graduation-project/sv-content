@@ -23,6 +23,7 @@ public class Content {
     private String description;
     private String author;
     private String source;
+    private String language;
 
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(
@@ -32,12 +33,13 @@ public class Content {
     )
     private List<Tags> tags = new ArrayList<>();
 
-    public Content(String name, String description, String author, String source, List<Tags> tags) {
+    public Content(String name, String description, String author, String source, String language, List<Tags> tags) {
         this.name = name;
         this.description = description;
         this.author = author;
         this.source = source;
         this.tags = tags;
+        this.language = language;
     }
 
     public Content() {
@@ -81,6 +83,14 @@ public class Content {
 
     public void setSource(String source) {
         this.source = source;
+    }
+
+    public String getLanguage() {
+        return language;
+    }
+
+    public void setLanguage(String language) {
+        this.language = language;
     }
 
     public List<Tags> getTags() {

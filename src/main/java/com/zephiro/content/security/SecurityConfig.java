@@ -28,7 +28,8 @@ public class SecurityConfig {
             .headers(headers -> headers.frameOptions(frame -> frame.disable()))
             .authorizeHttpRequests(requests -> requests
                 .requestMatchers("/h2/**").permitAll()
-                .anyRequest().authenticated()
+                .requestMatchers("/content/user").authenticated()
+                .anyRequest().permitAll()
             )
             .exceptionHandling(exception -> exception.authenticationEntryPoint(jwtAuthEntryPoint));
 

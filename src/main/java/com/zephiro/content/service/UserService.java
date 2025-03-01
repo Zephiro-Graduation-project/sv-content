@@ -9,13 +9,17 @@ import com.zephiro.content.repository.ContentRepository;
 import com.zephiro.content.entity.Content;
 
 @Service
-public class ContentUserService {
+public class UserService {
     
     @Autowired
     private ContentRepository contentRepository;
     
     public List<Content> searchAll() {
         return contentRepository.findAll();
+    }
+
+    public List<Content> searchByTag(Long tag_id) {
+        return contentRepository.findByTag(tag_id);
     }
 
     public Content searchById(Long id) {
