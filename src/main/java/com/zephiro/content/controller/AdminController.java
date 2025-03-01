@@ -35,11 +35,25 @@ public class AdminController {
         }
     }
 
+    @GetMapping("/bytag/{tag_id}")
+    public ResponseEntity<?> getContentByTag(@PathVariable Long tag_id) {
+        try {
+            List<Content> content = adminService.searchByTag(tag_id);
+            return ResponseEntity.ok(content);
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                    .body("{\"error\": \"Error occurred while fetching content\"}");
+        }
+    }
+
     @GetMapping("/{id}")
     public ResponseEntity<?> getContentById(@PathVariable Long id) {
         try {
             Content content = adminService.searchById(id);
             return ResponseEntity.ok(content);
+        } catch (RuntimeException e) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND)
+                    .body("{\"error\": \"" + e.getMessage() + "\"}");
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
                     .body("{\"error\": \"Error occurred while fetching content\"}");
@@ -55,19 +69,12 @@ public class AdminController {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
                     .body("{\"error\": \"Error occurred while creating content\"}");
         }
-        
     }
 
     @PutMapping("/edit/{id}")
     public ResponseEntity<?> updateContent(@PathVariable Long id, @RequestBody Content content) {
         try {
-            Content existingContent = adminService.searchById(id);
-            existingContent.setName(content.getName());
-            existingContent.setDescription(content.getDescription());
-            existingContent.setAuthor(content.getAuthor());
-            existingContent.setSource(content.getSource());
-            existingContent.setTags(content.getTags());
-            adminService.updateContent(existingContent);
+            adminService.updateContent(id, content);
             return ResponseEntity.ok("{\"message\": \"Content updated successfully\"}");
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)

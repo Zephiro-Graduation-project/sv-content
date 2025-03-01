@@ -18,6 +18,10 @@ public class AdminService {
         return contentRepository.findAll();
     }
 
+    public List<Content> searchByTag(Long tag_id) {
+        return contentRepository.findByTag(tag_id);
+    }
+
     public Content searchById(Long id) {
         return contentRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Content not found with id: " + id));
@@ -31,9 +35,15 @@ public class AdminService {
         }
     }
 
-    public void updateContent(Content content) {
+    public void updateContent(Long id, Content content) {
         try {
-            contentRepository.save(content);
+            Content existingContent = searchById(id);
+            existingContent.setName(content.getName());
+            existingContent.setDescription(content.getDescription());
+            existingContent.setAuthor(content.getAuthor());
+            existingContent.setSource(content.getSource());
+            existingContent.setTags(content.getTags());
+            contentRepository.save(existingContent);
         } catch (Exception e) {
             throw new RuntimeException("Error occurred during update", e);
         }
@@ -41,7 +51,8 @@ public class AdminService {
 
     public void deleteContent(Long id) {
         try {
-            contentRepository.deleteById(id);
+            if(searchById(id) != null)
+                contentRepository.deleteById(id);
         } catch (Exception e) {
             throw new RuntimeException("Error occurred during deletion", e);
         }

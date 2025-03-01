@@ -18,6 +18,10 @@ public class UserService {
         return contentRepository.findAll();
     }
 
+    public List<Content> searchByTag(Long tag_id) {
+        return contentRepository.findByTag(tag_id);
+    }
+
     public Content searchById(Long id) {
         return contentRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Content not found with id: " + id));
