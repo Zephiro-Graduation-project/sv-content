@@ -9,7 +9,7 @@ import com.zephiro.content.repository.ContentRepository;
 import com.zephiro.content.entity.Content;
 
 @Service
-public class ContentUserService {
+public class UserService {
     
     @Autowired
     private ContentRepository contentRepository;

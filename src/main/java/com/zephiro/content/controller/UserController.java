@@ -11,19 +11,19 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.zephiro.content.entity.Content;
-import com.zephiro.content.service.ContentUserService;
+import com.zephiro.content.service.UserService;
 
 @RestController
 @RequestMapping("/content/user")
-public class ContentUserController {
+public class UserController {
     
     @Autowired
-    private ContentUserService contentUserService;
+    private UserService userService;
     
     @GetMapping("/all")
     public ResponseEntity<?> getAllContent() {
         try {
-            List<Content> content = contentUserService.searchAll();
+            List<Content> content = userService.searchAll();
             return ResponseEntity.ok(content);
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
@@ -34,7 +34,7 @@ public class ContentUserController {
     @GetMapping("/{id}")
     public ResponseEntity<?> getContentById(@PathVariable Long id) {
         try {
-            Content content = contentUserService.searchById(id);
+            Content content = userService.searchById(id);
             return ResponseEntity.ok(content);
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
