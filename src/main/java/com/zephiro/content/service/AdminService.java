@@ -43,6 +43,8 @@ public class AdminService {
             existingContent.setAuthor(content.getAuthor());
             existingContent.setSource(content.getSource());
             existingContent.setLanguage(content.getLanguage());
+            existingContent.setUrl(content.getUrl());
+            existingContent.setImagePath(content.getImagePath());
             existingContent.setTags(content.getTags());
             contentRepository.save(existingContent);
         } catch (Exception e) {

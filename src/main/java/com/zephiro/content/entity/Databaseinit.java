@@ -32,10 +32,40 @@ public class Databaseinit implements ApplicationRunner{
         Tags tag5 = tagsRepository.save(new Tags("Etiqueta 5"));
         Tags tag6 = tagsRepository.save(new Tags("Etiqueta 6"));
 
-        Content content1 = new Content("Contenido A", "Descripción A", "Autor A", "Fuente A", "Español", List.of(tag1, tag2));
-        Content content2 = new Content("Contenido B", "Descripción B", "Autor B", "Fuente B", "Inglés", List.of(tag3, tag4));
-        Content content3 = new Content("Contenido C", "Descripción C", "Autor C", "Fuente C", "Español", List.of(tag5, tag6));
+        Content content1 = new Content(
+            "Contenido A", 
+            "Descripción A", 
+            "Autor A", 
+            "Fuente A", 
+            "Español", 
+            "https://example.com/a", 
+            "https://example.com/images/a.jpg", 
+            List.of(tag1, tag2)
+        );
+        contentRepository.save(content1);
 
-        contentRepository.saveAll(List.of(content1, content2, content3));
+        Content content2 = new Content(
+            "Contenido B", 
+            "Descripción B", 
+            "Autor B", 
+            "Fuente B", 
+            "Inglés", 
+            "https://example.com/b", 
+            "https://example.com/images/b.jpg", 
+            List.of(tag3, tag4)
+        );
+        contentRepository.save(content2);
+
+        Content content3 = new Content(
+            "Contenido C", 
+            "Descripción C", 
+            "Autor C", 
+            "Fuente C", 
+            "Español", 
+            "https://example.com/c", 
+            "https://example.com/images/c.jpg", 
+            List.of(tag5, tag6)
+        );
+        contentRepository.save(content3);
     }
 }

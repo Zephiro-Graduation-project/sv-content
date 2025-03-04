@@ -22,8 +22,10 @@ public class Content {
     private String name;
     private String description;
     private String author;
-    private String source;
+    private String source; // This would be the organization that uploaded the content
     private String language;
+    private String url;
+    private String imagePath;
 
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(
@@ -33,13 +35,17 @@ public class Content {
     )
     private List<Tags> tags = new ArrayList<>();
 
-    public Content(String name, String description, String author, String source, String language, List<Tags> tags) {
+    
+    public Content(String name, String description, String author, String source, String language, String url,
+            String imagePath, List<Tags> tags) {
         this.name = name;
         this.description = description;
         this.author = author;
         this.source = source;
-        this.tags = tags;
         this.language = language;
+        this.url = url;
+        this.imagePath = imagePath;
+        this.tags = tags;
     }
 
     public Content() {
@@ -91,6 +97,22 @@ public class Content {
 
     public void setLanguage(String language) {
         this.language = language;
+    }
+
+    public String getUrl() {
+        return url;
+    }
+
+    public void setUrl(String url) {
+        this.url = url;
+    }
+
+    public String getImagePath() {
+        return imagePath;
+    }
+
+    public void setImagePath(String imagePath) {
+        this.imagePath = imagePath;
     }
 
     public List<Tags> getTags() {
