@@ -18,11 +18,11 @@ public class UserService {
         return contentRepository.findAll();
     }
 
-    public List<Content> searchByTag(Long tag_id) {
+    public List<Content> searchByTag(String tag_id) {
         return contentRepository.findByTag(tag_id);
     }
 
-    public Content searchById(Long id) {
+    public Content searchById(String id) {
         return contentRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Content not found with id: " + id));
     }

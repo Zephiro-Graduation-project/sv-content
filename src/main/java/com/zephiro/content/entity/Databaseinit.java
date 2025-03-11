@@ -24,7 +24,11 @@ public class Databaseinit implements ApplicationRunner{
 
     @Override
     public void run(ApplicationArguments args) throws Exception {
+        // Elimina todos los registros previos
+        contentRepository.deleteAll();
+        tagsRepository.deleteAll();
 
+        // Crear tags de prueba
         Tags tag1 = tagsRepository.save(new Tags("Etiqueta 1"));
         Tags tag2 = tagsRepository.save(new Tags("Etiqueta 2"));
         Tags tag3 = tagsRepository.save(new Tags("Etiqueta 3"));
@@ -32,6 +36,7 @@ public class Databaseinit implements ApplicationRunner{
         Tags tag5 = tagsRepository.save(new Tags("Etiqueta 5"));
         Tags tag6 = tagsRepository.save(new Tags("Etiqueta 6"));
 
+        // Crear contenido de prueba
         Content content1 = new Content(
             "Contenido A", 
             "Descripción A", 

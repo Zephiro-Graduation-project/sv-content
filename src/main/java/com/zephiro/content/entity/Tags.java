@@ -1,17 +1,13 @@
 package com.zephiro.content.entity;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
 
-@Entity
-@Table
+@Document(collection = "tags")
 public class Tags {
 
     @Id
-    @GeneratedValue
-    private Long id;
+    private String id;
     private String name;
 
     public Tags(String name) {
@@ -21,11 +17,11 @@ public class Tags {
     public Tags() {
     }
     
-    public Long getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(String id) {
         this.id = id;
     }
 

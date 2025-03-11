@@ -32,7 +32,7 @@ public class UserController {
     }
 
     @GetMapping("/bytag/{tag_id}")
-    public ResponseEntity<?> getContentByTag(@PathVariable Long tag_id) {
+    public ResponseEntity<?> getContentByTag(@PathVariable String tag_id) {
         try {
             List<Content> content = userService.searchByTag(tag_id);
             return ResponseEntity.ok(content);
@@ -43,7 +43,7 @@ public class UserController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<?> getContentById(@PathVariable Long id) {
+    public ResponseEntity<?> getContentById(@PathVariable String id) {
         try {
             Content content = userService.searchById(id);
             return ResponseEntity.ok(content);

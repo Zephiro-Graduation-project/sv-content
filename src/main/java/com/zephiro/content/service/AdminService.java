@@ -18,24 +18,25 @@ public class AdminService {
         return contentRepository.findAll();
     }
 
-    public List<Content> searchByTag(Long tag_id) {
+    public List<Content> searchByTag(String tag_id) {
         return contentRepository.findByTag(tag_id);
     }
 
-    public Content searchById(Long id) {
+    public Content searchById(String id) {
         return contentRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Content not found with id: " + id));
     }
 
     public void createContent(Content content) {
         try {
+            
             contentRepository.save(content);
         } catch (Exception e) {
             throw new RuntimeException("Error occurred during creation", e);
         }
     }
 
-    public void updateContent(Long id, Content content) {
+    public void updateContent(String id, Content content) {
         try {
             Content existingContent = searchById(id);
             existingContent.setName(content.getName());
@@ -52,7 +53,7 @@ public class AdminService {
         }
     }
 
-    public void deleteContent(Long id) {
+    public void deleteContent(String id) {
         try {
             if(searchById(id) != null)
                 contentRepository.deleteById(id);

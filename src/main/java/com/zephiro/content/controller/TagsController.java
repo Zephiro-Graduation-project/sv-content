@@ -36,7 +36,7 @@ public class TagsController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<?> getTagById(@PathVariable Long id) {
+    public ResponseEntity<?> getTagById(@PathVariable String id) {
         try {
             Tags tags = tagsService.searchTagById(id);
             return ResponseEntity.ok(tags);
@@ -61,7 +61,7 @@ public class TagsController {
     }
 
     @PutMapping("/edit/{id}")
-    public ResponseEntity<?> updateTag(@PathVariable Long id, @RequestBody Tags tag) {
+    public ResponseEntity<?> updateTag(@PathVariable String id, @RequestBody Tags tag) {
         try {
             tagsService.updateTag(id, tag);
             return ResponseEntity.ok("{\"message\": \"Tag updated successfully\"}");
@@ -72,7 +72,7 @@ public class TagsController {
     }
 
     @DeleteMapping("/delete/{id}")
-    public ResponseEntity<?> deleteTag(@PathVariable Long id) {
+    public ResponseEntity<?> deleteTag(@PathVariable String id) {
         try {
             tagsService.deleteTag(id);
             return ResponseEntity.ok("{\"message\": \"Tag deleted successfully\"}");

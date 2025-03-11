@@ -1,24 +1,16 @@
 package com.zephiro.content.entity;
 
-import java.util.ArrayList;
 import java.util.List;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.FetchType;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.JoinTable;
-import jakarta.persistence.ManyToMany;
-import jakarta.persistence.Table;
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.DBRef;
+import org.springframework.data.mongodb.core.mapping.Document;
 
-@Entity
-@Table
+@Document(collection = "content")
 public class Content {
 
     @Id
-    @GeneratedValue
-    private Long id;
+    private String id;
     private String name;
     private String description;
     private String author;
@@ -27,17 +19,11 @@ public class Content {
     private String url;
     private String imagePath;
 
-    @ManyToMany(fetch = FetchType.EAGER)
-    @JoinTable(
-        name = "content_tags",
-        joinColumns = @JoinColumn(name = "content_id", referencedColumnName = "id"),
-        inverseJoinColumns = @JoinColumn(name = "tag_id", referencedColumnName = "id")
-    )
-    private List<Tags> tags = new ArrayList<>();
+    @DBRef
+    private List<Tags> tags;
 
     
-    public Content(String name, String description, String author, String source, String language, String url,
-            String imagePath, List<Tags> tags) {
+    public Content(String name, String description, String author, String source, String language, String url, String imagePath, List<Tags> tags) {
         this.name = name;
         this.description = description;
         this.author = author;
@@ -51,11 +37,11 @@ public class Content {
     public Content() {
     }
 
-    public Long getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(String id) {
         this.id = id;
     }
 

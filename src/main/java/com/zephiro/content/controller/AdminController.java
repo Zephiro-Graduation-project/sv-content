@@ -36,7 +36,7 @@ public class AdminController {
     }
 
     @GetMapping("/bytag/{tag_id}")
-    public ResponseEntity<?> getContentByTag(@PathVariable Long tag_id) {
+    public ResponseEntity<?> getContentByTag(@PathVariable String tag_id) {
         try {
             List<Content> content = adminService.searchByTag(tag_id);
             return ResponseEntity.ok(content);
@@ -47,7 +47,7 @@ public class AdminController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<?> getContentById(@PathVariable Long id) {
+    public ResponseEntity<?> getContentById(@PathVariable String id) {
         try {
             Content content = adminService.searchById(id);
             return ResponseEntity.ok(content);
@@ -72,7 +72,7 @@ public class AdminController {
     }
 
     @PutMapping("/edit/{id}")
-    public ResponseEntity<?> updateContent(@PathVariable Long id, @RequestBody Content content) {
+    public ResponseEntity<?> updateContent(@PathVariable String id, @RequestBody Content content) {
         try {
             adminService.updateContent(id, content);
             return ResponseEntity.ok("{\"message\": \"Content updated successfully\"}");
@@ -83,7 +83,7 @@ public class AdminController {
     }
     
     @DeleteMapping("/delete/{id}")
-    public ResponseEntity<?> deleteContent(@PathVariable Long id) {
+    public ResponseEntity<?> deleteContent(@PathVariable String id) {
         try {
             adminService.deleteContent(id);
             return ResponseEntity.ok("{\"message\": \"Content deleted successfully\"}");
