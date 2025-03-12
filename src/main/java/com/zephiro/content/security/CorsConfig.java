@@ -1,5 +1,4 @@
 package com.zephiro.content.security;
-// ToDo: para el servicio plantilla
 
 import java.util.Arrays;
 
