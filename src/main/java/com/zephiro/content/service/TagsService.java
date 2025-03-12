@@ -18,7 +18,7 @@ public class TagsService {
         return tagsRepository.findAll();
     }
 
-    public Tags searchTagById(Long id) {
+    public Tags searchTagById(String id) {
         return tagsRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Tag not found with id: " + id));
     }
@@ -31,7 +31,7 @@ public class TagsService {
         }
     }
 
-    public void updateTag(Long id, Tags tag) {
+    public void updateTag(String id, Tags tag) {
         try {
             Tags existingTag = searchTagById(id);
             existingTag.setName(tag.getName());
@@ -41,7 +41,7 @@ public class TagsService {
         }
     }
 
-    public void deleteTag(Long id) {
+    public void deleteTag(String id) {
         tagsRepository.findById(id)
                     .orElseThrow(() -> new RuntimeException("Tag not found with id: " + id));
 
