@@ -56,7 +56,7 @@ public class TagsController {
             return ResponseEntity.ok("{\"message\": \"Tag created successfully\"}");
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
-                    .body("{\"error\": \"Error occurred while creating tag\"}");
+                    .body("{\"error\": \"" + e.getMessage() + "\"}");
         }
     }
 
@@ -67,7 +67,7 @@ public class TagsController {
             return ResponseEntity.ok("{\"message\": \"Tag updated successfully\"}");
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
-                    .body("{\"error\": \"Error occurred while updating tag\"}");
+                    .body("{\"error\": \"" + e.getMessage() + "\"}");
         }
     }
 

@@ -67,7 +67,7 @@ public class AdminController {
             return ResponseEntity.ok("{\"message\": \"Content created successfully\"}");
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
-                    .body("{\"error\": \"Error occurred while creating content\"}");
+                    .body("{\"error\": \"" + e.getMessage() + "\"}");
         }
     }
 
@@ -78,7 +78,7 @@ public class AdminController {
             return ResponseEntity.ok("{\"message\": \"Content updated successfully\"}");
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
-                    .body("{\"error\": \"Error occurred while updating content\"}");
+                    .body("{\"error\": \"" + e.getMessage() + "\"}");
         }
     }
     

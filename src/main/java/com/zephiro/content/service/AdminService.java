@@ -28,37 +28,28 @@ public class AdminService {
     }
 
     public void createContent(Content content) {
-        try {
-            
-            contentRepository.save(content);
-        } catch (Exception e) {
-            throw new RuntimeException("Error occurred during creation", e);
-        }
+        contentRepository.save(content);
     }
 
     public void updateContent(String id, Content content) {
-        try {
-            Content existingContent = searchById(id);
-            existingContent.setName(content.getName());
-            existingContent.setDescription(content.getDescription());
-            existingContent.setAuthor(content.getAuthor());
-            existingContent.setSource(content.getSource());
-            existingContent.setLanguage(content.getLanguage());
-            existingContent.setUrl(content.getUrl());
-            existingContent.setImagePath(content.getImagePath());
-            existingContent.setTags(content.getTags());
-            contentRepository.save(existingContent);
-        } catch (Exception e) {
-            throw new RuntimeException("Error occurred during update", e);
+        if (contentRepository.findById(id).isEmpty()) {
+            throw new RuntimeException("Content not found with id: " + id);
         }
+
+        Content existingContent = searchById(id);
+        existingContent.setName(content.getName());
+        existingContent.setDescription(content.getDescription());
+        existingContent.setAuthor(content.getAuthor());
+        existingContent.setSource(content.getSource());
+        existingContent.setLanguage(content.getLanguage());
+        existingContent.setUrl(content.getUrl());
+        existingContent.setImagePath(content.getImagePath());
+        existingContent.setTags(content.getTags());
+        contentRepository.save(existingContent);
     }
 
     public void deleteContent(String id) {
-        try {
-            if(searchById(id) != null)
-                contentRepository.deleteById(id);
-        } catch (Exception e) {
-            throw new RuntimeException("Error occurred during deletion", e);
-        }
+        if(searchById(id) != null)
+            contentRepository.deleteById(id);
     }
 }
