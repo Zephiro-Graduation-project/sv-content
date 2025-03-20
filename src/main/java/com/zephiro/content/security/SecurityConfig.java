@@ -1,5 +1,4 @@
 package com.zephiro.content.security;
-// ToDo: para el servicio plantilla
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -28,7 +27,8 @@ public class SecurityConfig {
             .headers(headers -> headers.frameOptions(frame -> frame.disable()))
             .authorizeHttpRequests(requests -> requests
                 .requestMatchers("/h2/**").permitAll()
-                .anyRequest().authenticated()
+                .requestMatchers("/content/user").authenticated()
+                .anyRequest().permitAll()
             )
             .exceptionHandling(exception -> exception.authenticationEntryPoint(jwtAuthEntryPoint));
 
