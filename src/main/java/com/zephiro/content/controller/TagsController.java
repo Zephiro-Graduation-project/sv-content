@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.zephiro.content.entity.Tags;
+import com.zephiro.content.entity.Tag;
 import com.zephiro.content.service.TagsService;
 
 @RestController
@@ -27,7 +27,7 @@ public class TagsController {
     @GetMapping("/all")
     public ResponseEntity<?> getAllTags() {
         try {
-            List<Tags> tags = tagsService.searchAllTags();
+            List<Tag> tags = tagsService.searchAllTags();
             return ResponseEntity.ok(tags);
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
@@ -38,7 +38,7 @@ public class TagsController {
     @GetMapping("/{id}")
     public ResponseEntity<?> getTagById(@PathVariable String id) {
         try {
-            Tags tags = tagsService.searchTagById(id);
+            Tag tags = tagsService.searchTagById(id);
             return ResponseEntity.ok(tags);
         } catch (RuntimeException e) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND)
@@ -50,7 +50,7 @@ public class TagsController {
     }
 
     @PostMapping("/add")
-    public ResponseEntity<?> createTag(@RequestBody Tags tag) {
+    public ResponseEntity<?> createTag(@RequestBody Tag tag) {
         try {
             tagsService.createTag(tag);
             return ResponseEntity.ok("{\"message\": \"Tag created successfully\"}");
@@ -61,7 +61,7 @@ public class TagsController {
     }
 
     @PutMapping("/edit/{id}")
-    public ResponseEntity<?> updateTag(@PathVariable String id, @RequestBody Tags tag) {
+    public ResponseEntity<?> updateTag(@PathVariable String id, @RequestBody Tag tag) {
         try {
             tagsService.updateTag(id, tag);
             return ResponseEntity.ok("{\"message\": \"Tag updated successfully\"}");

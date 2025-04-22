@@ -14,7 +14,7 @@ import com.zephiro.content.repository.TagsRepository;
 
 @Controller
 @Profile("dev")
-public class Databaseinit implements ApplicationRunner{
+public class dbinitDev implements ApplicationRunner{
 
     @Autowired
     private ContentRepository contentRepository;
@@ -29,12 +29,12 @@ public class Databaseinit implements ApplicationRunner{
         tagsRepository.deleteAll();
 
         // Crear tags de prueba
-        Tags tag1 = tagsRepository.save(new Tags("Etiqueta 1"));
-        Tags tag2 = tagsRepository.save(new Tags("Etiqueta 2"));
-        Tags tag3 = tagsRepository.save(new Tags("Etiqueta 3"));
-        Tags tag4 = tagsRepository.save(new Tags("Etiqueta 4"));
-        Tags tag5 = tagsRepository.save(new Tags("Etiqueta 5"));
-        Tags tag6 = tagsRepository.save(new Tags("Etiqueta 6"));
+        Tag tag1 = tagsRepository.save(new Tag("Etiqueta 1"));
+        Tag tag2 = tagsRepository.save(new Tag("Etiqueta 2"));
+        Tag tag3 = tagsRepository.save(new Tag("Etiqueta 3"));
+        Tag tag4 = tagsRepository.save(new Tag("Etiqueta 4"));
+        Tag tag5 = tagsRepository.save(new Tag("Etiqueta 5"));
+        Tag tag6 = tagsRepository.save(new Tag("Etiqueta 6"));
 
         // Crear contenido de prueba
         Content content1 = new Content(
