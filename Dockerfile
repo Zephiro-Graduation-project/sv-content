@@ -17,6 +17,6 @@ WORKDIR /app
 COPY --from=build /app/target/*.jar app.jar
 COPY .env .env
 
-EXPOSE ${SERVER_PORT}
+EXPOSE 8070
 
-ENTRYPOINT ["sh", "-c", "java -jar app.jar --server.port=${SERVER_PORT}"]
+ENTRYPOINT ["sh", "-c", "java -jar app.jar --server.port=8070"]
