@@ -20,10 +20,10 @@ public class Content {
     private String imagePath;
 
     @DBRef
-    private List<Tags> tags;
+    private List<Tag> tags;
 
     
-    public Content(String name, String description, String author, String source, String language, String url, String imagePath, List<Tags> tags) {
+    public Content(String name, String description, String author, String source, String language, String url, String imagePath, List<Tag> tags) {
         this.name = name;
         this.description = description;
         this.author = author;
@@ -101,11 +101,11 @@ public class Content {
         this.imagePath = imagePath;
     }
 
-    public List<Tags> getTags() {
+    public List<Tag> getTags() {
         return tags;
     }
 
-    public void setTags(List<Tags> tags) {
+    public void setTags(List<Tag> tags) {
         this.tags = tags;
     }
 }

@@ -6,7 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.zephiro.content.repository.TagsRepository;
-import com.zephiro.content.entity.Tags;
+import com.zephiro.content.entity.Tag;
 
 @Service
 public class TagsService {
@@ -14,25 +14,25 @@ public class TagsService {
     @Autowired
     private TagsRepository tagsRepository;
 
-    public List<Tags> searchAllTags() {
+    public List<Tag> searchAllTags() {
         return tagsRepository.findAll();
     }
 
-    public Tags searchTagById(String id) {
+    public Tag searchTagById(String id) {
         return tagsRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Tag not found with id: " + id));
     }
 
-    public void createTag(Tags tag) {
+    public void createTag(Tag tag) {
         tagsRepository.save(tag);
     }
 
-    public void updateTag(String id, Tags tag) {
+    public void updateTag(String id, Tag tag) {
         if (tagsRepository.findById(id).isEmpty()) {
             throw new RuntimeException("Tag not found with id: " + id);
         }
 
-        Tags existingTag = searchTagById(id);
+        Tag existingTag = searchTagById(id);
         existingTag.setName(tag.getName());
         tagsRepository.save(existingTag);
     }

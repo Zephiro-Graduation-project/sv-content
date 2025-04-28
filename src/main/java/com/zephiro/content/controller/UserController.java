@@ -55,4 +55,15 @@ public class UserController {
                     .body("{\"error\": \"Error occurred while fetching content\"}");
         }
     }
+
+    @GetMapping("/suggested/{stress}/{anxiety}")
+    public ResponseEntity<?> getSuggestedContent(@PathVariable int stress, @PathVariable int anxiety) {
+        try {
+            List<Content> content = userService.suggestedContent(stress, anxiety);
+            return ResponseEntity.ok(content);
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                    .body("{\"error\": \"Error occurred while fetching content\"}");
+        }
+    }
 }
