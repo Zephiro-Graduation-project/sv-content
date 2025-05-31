@@ -38,23 +38,23 @@ public class UserService {
         Tag stressTag;
         Tag anxietyTag;
 
-        if(stress >= 4 && stress <= 21) {
+        if(stress >= 10 && stress <= 36) {
             stressTag = tagsRepository.findByName("Estrés bajo");
-        } else if(stress >= 22 && stress <= 40) {
+        } else if(stress >= 37 && stress <= 70) {
             stressTag = tagsRepository.findByName("Estrés moderado");
-        } else if(stress >= 41 && stress <= 60) {
+        } else if(stress >= 71 && stress <= 100) {
             stressTag = tagsRepository.findByName("Estrés alto");
         } else {
             throw new RuntimeException("Stress level out of range: " + stress);
         }
 
-        if(anxiety >= 4 && anxiety <= 12) {
+        if(anxiety >= 10 && anxiety <= 30) {
             anxietyTag = tagsRepository.findByName("Ansiedad mínima");
-        } else if(anxiety >= 13 && anxiety <= 22) {
+        } else if(anxiety >= 31 && anxiety <= 54) {
             anxietyTag = tagsRepository.findByName("Ansiedad leve");
-        } else if(anxiety >= 23 && anxiety <= 31) {
+        } else if(anxiety >= 55 && anxiety <= 76) {
             anxietyTag = tagsRepository.findByName("Ansiedad moderada");
-        } else if(anxiety >= 32 && anxiety <= 41) {
+        } else if(anxiety >= 77 && anxiety <= 100) {
             anxietyTag = tagsRepository.findByName("Ansiedad severa");
         } else {
             throw new RuntimeException("Anxiety level out of range: " + anxiety);
